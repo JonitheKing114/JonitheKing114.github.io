@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VideoHub - Anmeldung</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f0f2f5;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:450px;
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.12);
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.logo-box{
+    display:inline-block;
+    background:#e62117;
+    color:white;
+    font-weight:bold;
+    font-size:26px;
+    padding:10px 18px;
+    border-radius:12px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:10px;
+    font-size:28px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:30px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-size:14px;
+    font-weight:bold;
+    color:#555;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    margin-bottom:18px;
+}
+
+input[readonly]{
+    background:#f8f8f8;
+    color:#666;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#1a73e8;
+    border:none;
+    border-radius:8px;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1557b0;
+}
+
+.message{
+    margin-top:20px;
+    text-align:center;
+    min-height:20px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGO bleibt immer -->
+    <div class="logo">
+        <div class="logo-box">▶️ YouTube</div>
+    </div>
+
+    <!-- Inhalt, der später ersetzt wird -->
+    <div id="content">
+
+        <h1>Anmeldung</h1>
+
+        <div class="subtitle">
+            Zugriff auf das Konto von Lehrer Schmidt
+        </div>
+
+        <label>E-Mail-Adresse</label>
+        <input type="email" id="email" value="lehrerschmidt3.141@gmail.com" readonly>
+
+        <label>Passwort</label>
+        <input type="password" id="pass" placeholder="Passwort eingeben">
+
+        <button onclick="login()">Weiter</button>
+
+        <div class="message" id="message"></div>
+
+    </div>
+
+</div>
+
+<script>
+function login() {
+    const password = document.getElementById("pass").value;
+    const message = document.getElementById("message");
+
+    if (password === "FEOO4/+-") {
+        message.style.color = "green";
+        message.textContent = "Anmeldung erfolgreich.";
+
+        // Pop-up zentriert öffnen
+        const width = 420;
+        const height = 350;
+
+        const left = (screen.width - width) / 2;
+        const top = (screen.height - height) / 2;
+
+        const popup = window.open(
+            "",
+            "popup",
+            `width=${width},height=${height},left=${left},top=${top}`
+        );
+
+        popup.document.write(`
+            <html>
+            <head>
+                <title>Kanalstatus</title>
+                <style>
+                    body{
+                        font-family: Arial, sans-serif;
+                        padding: 20px;
+                        background: #f0f2f5;
+                    }
+                    h3{
+                        margin-bottom: 15px;
+                    }
+                    button{
+                        width: 100%;
+                        padding: 12px;
+                        margin-top: 15px;
+                        border: none;
+                        border-radius: 6px;
+                        font-size: 16px;
+                        cursor: pointer;
+                    }
+                    .restore{
+                        background: #2e7d32;
+                        color: white;
+                    }
+                    .ignore{
+                        background: #777;
+                        color: white;
+                    }
+                </style>
+            </head>
+            <body>
+
+                <h3>⚠ Kanal gefunden</h3>
+                <p>Der Kanal von Lehrer Schmidt wurde als gelöscht markiert.</p>
+                <p>Möchtet ihr den Kanal wiederherstellen?</p>
+
+                <button class="restore" onclick="window.opener.restoreChannel(); window.close();">
+                    Kanal wiederherstellen
+                </button>
+
+                <button class="ignore" onclick="window.opener.ignoreChannel(); window.close();">
+                    Nicht wiederherstellen
+                </button>
+
+            </body>
+            </html>
+        `);
+
+    } else {
+        message.style.color = "red";
+        message.textContent = "Falsches Passwort.";
+    }
+}
+
+function restoreChannel() {
+
+    const content = document.getElementById("content");
+
+    content.innerHTML = `
+        <div style="
+            width: 100%;
+            padding: 30px;
+            background: #e7ffe7;
+            border-left: 6px solid #2e7d32;
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        ">
+
+            <h2 style="margin-bottom: 15px;">🔓 Kanal wiederhergestellt</h2>
+
+            <p style="font-size: 18px; line-height: 1.6;">
+                Die letzten Daten wurden erfolgreich geladen.
+                <br><br>
+                Letzter Upload enthielt eine versteckte Nachricht:
+                <br><br>
+                <b>„Falls jemand das sieht, ich befinde mich im Raum 204.“</b>
+                <br><br>
+                Ihr seid auf der richtigen Spur.
+            </p>
+
+        </div>
+    `;
+}
+
+function ignoreChannel() {
+    const content = document.getElementById("content");
+
+    content.innerHTML = `
+        <div style="
+            width: 100%;
+            padding: 30px;
+            background: #fff3f3;
+            border-left: 6px solid #b71c1c;
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        ">
+
+            <h2 style="margin-bottom: 15px;">❌ Wiederherstellung abgebrochen</h2>
+
+            <p style="font-size: 18px; line-height: 1.6;">
+                Bevor der Kanal endgültig gelöscht wird, wurde automatisch eine Sicherung geöffnet.
+                <br><br>
+                <b>Hinweis: Überprüft den Raum 204.</b>
+            </p>
+
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
